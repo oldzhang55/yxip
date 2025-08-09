@@ -38,8 +38,10 @@ jobs:
         git config --global user.email "tianshideyou@proton.me"
         git config --global user.name "tianshipapa"
         if [ -n "$(git status --porcelain)" ]; then
+          git stash push -m "temp stash before pull"
+          git pull --rebase origin main
+          git stash pop
           git add ip.txt
-          git pull --rebase origin main   # 拉取远程并合并最新改动
           git commit -m "Automatic update"
           git push origin main
         else
